@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use App\Models\User;
 use Symfony\Component\HttpFoundation\Response;
 
 class RedirectIfNotUser
@@ -15,7 +16,7 @@ class RedirectIfNotUser
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (!auth()->check() || !auth()->user()->isUser()) {
+        if (!auth()->check() || !auth()->user()->role === 'user') {
             return redirect('/login');
         }
         return $next($request);

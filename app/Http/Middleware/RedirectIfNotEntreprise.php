@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use App\Models\User;
 use Symfony\Component\HttpFoundation\Response;
 
 class RedirectIfNotEntreprise
@@ -15,7 +16,7 @@ class RedirectIfNotEntreprise
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (!auth()->check() || !auth()->user()->isEntreprise()) {
+        if (!auth()->check() || !auth()->user()->role =='entreprise') {
             return redirect('/login');
         }
         return $next($request);

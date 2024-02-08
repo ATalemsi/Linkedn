@@ -12,9 +12,42 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
-                    </x-nav-link>
+                    @if(Auth::check())
+                        @if(Auth::user()->role === 'user')
+                            <!-- Display CV and Offres d'emploi for User -->
+                            <x-nav-link :href="route('user.cv')" :active="request()->routeIs('cv.index')">
+                                {{ __('CV') }}
+                            </x-nav-link>
+                            <x-nav-link :href="route('user.offre')" :active="request()->routeIs('user.offre')">
+                                {{ __('Offres d\'emploi') }}
+                            </x-nav-link>
+                            <x-nav-link :href="route('user.profile')" :active="request()->routeIs('user.profile')">
+                                {{ __('Profil') }}
+                            </x-nav-link>
+                        @elseif(Auth::user()->role === 'entreprise')
+                            <!-- Display Offre d'emploi and Candidats for Entreprise -->
+                            <x-nav-link :href="route('entreprise.offres')" :active="request()->routeIs('entreprise.offres')">
+                                {{ __('Offres d\'emploi') }}
+                            </x-nav-link>
+                            <x-nav-link :href="route('entreprise.condidate')" :active="request()->routeIs('entreprise.condidate ')">
+                                {{ __('Candidats') }}
+                            </x-nav-link>
+                            <x-nav-link :href="route('entreprise.profile')" :active="request()->routeIs('entreprise.profile')">
+                                {{ __('Profil') }}
+                            </x-nav-link>
+                            <x-nav-link :href="route('entreprise.dashboard')" :active="request()->routeIs('entreprise.dashboard')">
+                                {{ __('Profil') }}
+                            </x-nav-link>
+                        @elseif(Auth::user()->role === 'admin')
+                            <!-- Display Statistiques and Offres d'emploi for Admin -->
+                            <x-nav-link :href="route('statistiques.index')" :active="request()->routeIs('admin.statistique')">
+                                {{ __('Statistiques') }}
+                            </x-nav-link>
+                            <x-nav-link :href="route('admin.offre')" :active="request()->routeIs('admin.offre')">
+                                {{ __('Offres d\'emploi') }}
+                            </x-nav-link>
+                        @endif
+                    @endif
                 </div>
             </div>
 
@@ -24,6 +57,8 @@
                     <x-slot name="trigger">
                         <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
                             <div>{{ Auth::user()->name }}</div>
+                            (<div>{{ Auth::user()->role }}</div>)
+
 
                             <div class="ms-1">
                                 <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">

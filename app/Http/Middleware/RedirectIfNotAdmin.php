@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -15,7 +16,7 @@ class RedirectIfNotAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (!auth()->check() || !auth()->user()->isAdmin()) {
+        if (!auth()->check() || !auth()->user()->role === 'admin') {
             return redirect('/login');
         }
         return $next($request);

@@ -47,14 +47,11 @@ class RegisteredUserController extends Controller
         event(new Registered($user));
 
         Auth::login($user);
-        if ($user->isAdmin()) {
-            return redirect()->intended('/admin/dashboard');
-        } elseif ($user->isEntreprise()) {
-            return redirect()->intended('/entreprise/dashboard');
-        } else {
-            return redirect()->intended('/user/dashboard');
+        if (Auth::user()->role === 'user') {
+            return redirect()->route('user.dashboard');
+        } elseif (Auth::user()->role === 'admin') {
+            return redirect()->route('admin.dashboard');
+        } else
+            return redirect()->route('entreprise.dashboard');
         }
-
-    }
-
 }
