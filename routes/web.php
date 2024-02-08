@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\EntrepriseController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,6 +24,12 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+// Dashboard routes for user, admin, and entreprise
+Route::get('/user/dashboard', [UserController::class, 'dashboard'])->middleware(['auth', 'user', 'redirect.if.not.user']);
+Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->middleware(['auth', 'admin', 'redirect.if.not.admin']);
+Route::get('/entreprise/dashboard', [EntrepriseController::class, 'dashboard'])->middleware(['auth', 'entreprise', 'redirect.if.not.entreprise']);
+
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
