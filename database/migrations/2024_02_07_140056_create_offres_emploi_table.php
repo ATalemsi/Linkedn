@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('emplacement');
             $table->unsignedBigInteger('nombre_visites')->default(0);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -29,6 +30,10 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('offres_emploi');
+
+        Schema::dropIfExists('offre_emplois');
+        Schema::table('offre_emplois', function (Blueprint $table) {
+            $table->dropSoftDeletes();
+        });
     }
 };

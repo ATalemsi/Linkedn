@@ -5,9 +5,21 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
+                    @if(Auth::check())
+                        @if(Auth::user()->role === 'user')
+                    <a href="{{ route('user.dashboard') }}">
                         <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
                     </a>
+                        @elseif(Auth::user()->role === 'entreprise')
+                            <a href="{{ route('entreprise.dashboard') }}">
+                                <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
+                            </a>
+                        @elseif(Auth::user()->role === 'admin')
+                            <a href="{{ route('admin.statistique') }}">
+                                <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
+                            </a>
+                        @endif
+                    @endif
                 </div>
 
                 <!-- Navigation Links -->
@@ -15,7 +27,7 @@
                     @if(Auth::check())
                         @if(Auth::user()->role === 'user')
                             <!-- Display CV and Offres d'emploi for User -->
-                            <x-nav-link :href="route('user.cv')" :active="request()->routeIs('cv.index')">
+                            <x-nav-link :href="route('cv.form')" :active="request()->routeIs('cv.form')">
                                 {{ __('CV') }}
                             </x-nav-link>
                             <x-nav-link :href="route('user.offre')" :active="request()->routeIs('user.offre')">
@@ -24,27 +36,27 @@
                             <x-nav-link :href="route('user.profile')" :active="request()->routeIs('user.profile')">
                                 {{ __('Profil') }}
                             </x-nav-link>
+                            <x-nav-link :href="route('user.entreprise')" :active="request()->routeIs('user.entreprise')">
+                                {{ __('entreprise') }}
+                            </x-nav-link>
                         @elseif(Auth::user()->role === 'entreprise')
                             <!-- Display Offre d'emploi and Candidats for Entreprise -->
                             <x-nav-link :href="route('entreprise.offres')" :active="request()->routeIs('entreprise.offres')">
                                 {{ __('Offres d\'emploi') }}
                             </x-nav-link>
-                            <x-nav-link :href="route('entreprise.condidate')" :active="request()->routeIs('entreprise.condidate ')">
+                            <x-nav-link :href="route('entreprise.condidate')" :active="request()->routeIs('entreprise.condidate')">
                                 {{ __('Candidats') }}
                             </x-nav-link>
                             <x-nav-link :href="route('entreprise.profile')" :active="request()->routeIs('entreprise.profile')">
                                 {{ __('Profil') }}
                             </x-nav-link>
-                            <x-nav-link :href="route('entreprise.dashboard')" :active="request()->routeIs('entreprise.dashboard')">
-                                {{ __('Profil') }}
-                            </x-nav-link>
                         @elseif(Auth::user()->role === 'admin')
                             <!-- Display Statistiques and Offres d'emploi for Admin -->
-                            <x-nav-link :href="route('statistiques.index')" :active="request()->routeIs('admin.statistique')">
+                            <x-nav-link :href="route('admin.statistique')" :active="request()->routeIs('admin.statistique')">
                                 {{ __('Statistiques') }}
                             </x-nav-link>
-                            <x-nav-link :href="route('admin.offre')" :active="request()->routeIs('admin.offre')">
-                                {{ __('Offres d\'emploi') }}
+                            <x-nav-link :href="route('admin.data')" :active="request()->routeIs('admin.data')">
+                                {{ __('Data ') }}
                             </x-nav-link>
                         @endif
                     @endif

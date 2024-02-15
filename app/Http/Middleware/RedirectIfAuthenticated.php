@@ -21,10 +21,15 @@ class RedirectIfAuthenticated
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
-                return redirect(RouteServiceProvider::HOME);
+                if (Auth::user()->role === 'user') {
+                    return redirect()->route('condidate.store');
+                } elseif (Auth::user()->role === 'admin') {
+                    return redirect()->route('admin.dashboard');
+                } else {
+                    return redirect()->route('entreprise.store');
+                }
             }
         }
-
         return $next($request);
     }
 }

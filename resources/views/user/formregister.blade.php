@@ -1,9 +1,9 @@
 <x-guest-layout>
-    <form method="POST" action="{{ route('condidate.store') }}">
+    <form method="POST" action="{{ route('condidate.store') }} " enctype="multipart/form-data">
         @csrf
         <div>
             <x-input-label for="photo_profil" :value="__('Photo Profile')" />
-            <x-text-input id="photo_profil" class="block mt-1 w-full" type="text" name="photo_profil" :value="old('photo_profil')" />
+            <x-text-input id="photo_profil" class="block mt-1 w-full" type="file" name="photo_profil" :value="old('photo_profil')" />
             <x-input-error :messages="$errors->get('photo_profil')" class="mt-2" />
         </div>
 
@@ -13,9 +13,8 @@
             <x-input-error :messages="$errors->get('titre')" class="mt-2" />
         </div>
 
-        <!-- Current Position -->
         <div class="mt-4">
-            <x-input-label for="poste_actuel" :value="__('Current Position')" />
+            <x-input-label for="poste_actuel" :value="__('Poste_actuel')" />
             <x-text-input id="poste_actuel" class="block mt-1 w-full" type="text" name="poste_actuel" :value="old('poste_actuel')" />
             <x-input-error :messages="$errors->get('poste_actuel')" class="mt-2" />
         </div>

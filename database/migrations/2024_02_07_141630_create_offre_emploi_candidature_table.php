@@ -12,15 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('offre_emploi_candidatures', function (Blueprint $table) {
-            // Define the combination of foreign keys as the primary key
+
             $table->primary(['offre_emploi_id', 'candidature_id']);
 
-            // Define the foreign key constraints
             $table->foreignId('offre_emploi_id')->constrained()->onDelete('cascade');
             $table->foreignId('candidature_id')->constrained()->onDelete('cascade');
 
-            // Add any additional columns to the pivot table here
             $table->timestamps();
+
         });
     }
 
@@ -29,6 +28,8 @@ return new class extends Migration
      */
     public function down(): void
     {
+
         Schema::dropIfExists('offre_emploi_candidature');
+
     }
 };

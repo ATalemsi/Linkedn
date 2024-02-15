@@ -31,14 +31,11 @@ class AuthenticatedSessionController extends Controller
 
         // Redirect users based on their role
         if (Auth::user()->role === 'user') {
-            return redirect()->intended(RouteServiceProvider::USER_DASHBOARD);
+            return redirect()->route('user.dashboard');
         } elseif (Auth::user()->role === 'admin') {
-            return redirect()->intended(RouteServiceProvider::ADMIN_DASHBOARD);
-        } elseif (Auth::user()->role === 'entreprise') {
-            return redirect()->intended(RouteServiceProvider::ENTREPRISE_DASHBOARD);
-        } else {
-            // Handle other roles or fallback
-            return redirect()->intended(RouteServiceProvider::HOME);
+            return redirect()->route('admin.dashboard');
+        } else{
+            return redirect()->route('entreprise.dashboard');
         }
     }
 

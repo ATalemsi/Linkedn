@@ -1,5 +1,5 @@
 <x-guest-layout>
-    <form method="POST" action="{{ route('entreprise.formregister') }}">
+    <form method="POST" action="{{ route('entreprise.store') }}" enctype="multipart/form-data">
         @csrf
         <div>
             <x-input-label for="nom" :value="__('Name')" />
@@ -10,7 +10,7 @@
         <!-- Logo -->
         <div class="mt-4">
             <x-input-label for="logo" :value="__('Logo')" />
-            <x-text-input id="logo" class="block mt-1 w-full" type="text" name="logo" :value="old('logo')" />
+            <x-text-input id="logo" class="block mt-1 w-full" type="file" name="logo" :value="old('logo')" />
             <x-input-error :messages="$errors->get('logo')" class="mt-2" />
         </div>
 

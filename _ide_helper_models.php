@@ -45,8 +45,9 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Candidature whereTitre($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Candidature whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Candidature whereUserId($value)
+ * @mixin \Eloquent
  */
-	class Candidature extends \Eloquent {}
+	class IdeHelperCandidature {}
 }
 
 namespace App\Models{
@@ -69,8 +70,9 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Competence whereNiveau($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Competence whereNom($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Competence whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
-	class Competence extends \Eloquent {}
+	class IdeHelperCompetence {}
 }
 
 namespace App\Models{
@@ -95,8 +97,9 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|CursusEducatif whereEtablissement($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CursusEducatif whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CursusEducatif whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
-	class CursusEducatif extends \Eloquent {}
+	class IdeHelperCursusEducatif {}
 }
 
 namespace App\Models{
@@ -111,8 +114,6 @@ namespace App\Models{
  * @property-read int|null $competences_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\CursusEducatif> $cursusEducatifs
  * @property-read int|null $cursus_educatifs_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ExperienceProfessionnelle> $experiencesProfessionnelles
- * @property-read int|null $experiences_professionnelles_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\LangueMaitrisee> $languesMaitrisees
  * @property-read int|null $langues_maitrisees_count
  * @property-read \App\Models\User $user
@@ -123,8 +124,9 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Cv whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Cv whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Cv whereUserId($value)
+ * @mixin \Eloquent
  */
-	class Cv extends \Eloquent {}
+	class IdeHelperCv {}
 }
 
 namespace App\Models{
@@ -155,32 +157,63 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Entreprise whereSlogan($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Entreprise whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Entreprise whereUserId($value)
+ * @mixin \Eloquent
  */
-	class Entreprise extends \Eloquent {}
+	class IdeHelperEntreprise {}
 }
 
 namespace App\Models{
 /**
  * App\Models\ExperienceProfessionnelle
  *
+ * @property int $id
+ * @property int $cv_id
+ * @property string $poste
+ * @property string $entreprise
+ * @property string $date_debut
+ * @property string|null $date_fin
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\Cv $cv
  * @method static \Illuminate\Database\Eloquent\Builder|ExperienceProfessionnelle newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ExperienceProfessionnelle newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ExperienceProfessionnelle query()
+ * @method static \Illuminate\Database\Eloquent\Builder|ExperienceProfessionnelle whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ExperienceProfessionnelle whereCvId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ExperienceProfessionnelle whereDateDebut($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ExperienceProfessionnelle whereDateFin($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ExperienceProfessionnelle whereEntreprise($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ExperienceProfessionnelle whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ExperienceProfessionnelle wherePoste($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ExperienceProfessionnelle whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
-	class ExperienceProfessionnelle extends \Eloquent {}
+	class IdeHelperExperienceProfessionnelle {}
 }
 
 namespace App\Models{
 /**
  * App\Models\LangueMaitrisee
  *
+ * @property int $id
+ * @property int $cv_id
+ * @property string $langue
+ * @property string $niveau
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\Cv $cv
  * @method static \Illuminate\Database\Eloquent\Builder|LangueMaitrisee newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|LangueMaitrisee newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|LangueMaitrisee query()
+ * @method static \Illuminate\Database\Eloquent\Builder|LangueMaitrisee whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LangueMaitrisee whereCvId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LangueMaitrisee whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LangueMaitrisee whereLangue($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LangueMaitrisee whereNiveau($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LangueMaitrisee whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
-	class LangueMaitrisee extends \Eloquent {}
+	class IdeHelperLangueMaitrisee {}
 }
 
 namespace App\Models{
@@ -213,8 +246,9 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|OffreEmploi whereTitre($value)
  * @method static \Illuminate\Database\Eloquent\Builder|OffreEmploi whereTypeContrat($value)
  * @method static \Illuminate\Database\Eloquent\Builder|OffreEmploi whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
-	class OffreEmploi extends \Eloquent {}
+	class IdeHelperOffreEmploi {}
 }
 
 namespace App\Models{
@@ -230,6 +264,7 @@ namespace App\Models{
  * @property string|null $remember_token
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Candidature|null $condidate
  * @property-read \App\Models\Cv|null $cv
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection<int, \Illuminate\Notifications\DatabaseNotification> $notifications
  * @property-read int|null $notifications_count
@@ -248,7 +283,8 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|User whereRememberToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereRole($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
-	class User extends \Eloquent implements \Illuminate\Contracts\Auth\MustVerifyEmail {}
+	class IdeHelperUser {}
 }
 

@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('industrie')->nullable();
             $table->text('description')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -28,6 +29,10 @@ return new class extends Migration
      */
     public function down(): void
     {
+
         Schema::dropIfExists('entreprises');
+        Schema::table('entreprises', function (Blueprint $table) {
+            $table->dropSoftDeletes();
+        });
     }
 };

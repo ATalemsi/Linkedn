@@ -23,6 +23,7 @@ return new class extends Migration
             $table->text('a_propos')->nullable();
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -31,6 +32,10 @@ return new class extends Migration
      */
     public function down(): void
     {
+
         Schema::dropIfExists('candidatures');
+        Schema::table('candidatures', function (Blueprint $table) {
+            $table->dropSoftDeletes();
+        });
     }
 };
