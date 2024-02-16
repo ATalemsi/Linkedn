@@ -63,10 +63,10 @@ class EntrepriseController extends Controller
 
         $entreprise = auth()->user()->entreprise;
 
-        // Get the IDs of the offres published by the authenticated entreprise
+
         $offreIds = $entreprise->offresEmploi->pluck('id');
 
-        // Get the candidatures associated with the offres published by the authenticated entreprise
+
         $candidatures = Candidature::whereHas('offresEmploi', function ($query) use ($offreIds) {
             $query->whereIn('offre_emploi_id', $offreIds);
         })->with('user', 'offresEmploi')->get();
@@ -81,6 +81,26 @@ class EntrepriseController extends Controller
         }
         $entreprise->delete();
         return redirect()->back()->with('success', 'Company archived successfully.');
+    }
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+        $entreprises = Entreprise::where('nom', 'like', "%$query%")
+            ->orWhere('description', 'like', "%$query%")
+            ->orWhere('industrie', 'like', "%$query%")
+            ->get();
+
+        return view('user.entreprise', compact('entreprises'));
+    }
+    public function searchoffre(Request $request)
+    {
+        $query = $request->input('query');
+        $offres = OffreEmploi::where('titre', 'like', "%$query%")
+            ->orWhere('type_contrat', 'like', "%$query%")
+            ->orWhere('competences_requises', 'like', "%$query%")
+            ->get();
+
+        return view('user.offre', compact('offres'));
     }
 
 

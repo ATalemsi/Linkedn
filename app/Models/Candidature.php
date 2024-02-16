@@ -32,4 +32,5 @@ class Candidature extends Model
         return $this->belongsToMany(OffreEmploi::class, 'offre_emploi_candidatures', 'candidature_id', 'offre_emploi_id');
     }
 
+
 }

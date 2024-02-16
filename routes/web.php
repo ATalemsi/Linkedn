@@ -7,11 +7,13 @@ use App\Http\Controllers\CursusController;
 use App\Http\Controllers\EntrepriseController;
 use App\Http\Controllers\ExperienceController;
 use App\Http\Controllers\LanguageController;
+use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\OffreEmploiController;
 use App\Http\Controllers\PDFController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use MailchimpMarketing\ApiClient;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +25,7 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::post('/user/newsletter',[NewsletterController::class,'subscribe'])->middleware(['auth'])->name('user.newsletter');
 
 Route::get('/', function () {
     return view('welcome');
@@ -74,7 +77,11 @@ Route::get('/user/cvpdf', [PDFController::class, 'index'])->name('cv.index');
 Route::get('/user/offre',[UserController::class,'offre'])->middleware(['auth'])->name('user.offre');
 Route::get('/user/profile',[UserController::class,'profile'])->middleware(['auth'])->name('user.profile');
 Route::post('/offre/postuler', [CandidateController::class, 'postuler'])->name('offre.postuler');
-Route::post('/user/postuler', [CandidateController::class, 'postuler'])->name('offre.postuler');
+Route::get('/user/entreprise', [CandidateController::class, 'entreprise'])->name('user.entreprise');
+
+Route::get('/search', [EntrepriseController::class, 'search'])->name('search');
+Route::get('/searchoffre', [EntrepriseController::class, 'searchoffre'])->name('searchoffre');
+
 
 Route::get('/entreprise/condidate',[EntrepriseController::class,'condidature'])->middleware(['auth'])->name('entreprise.condidate');
 Route::get('/entreprise/offres',[EntrepriseController::class,'offre'])->middleware(['auth'])->name('entreprise.offres');

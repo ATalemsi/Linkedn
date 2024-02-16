@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Candidature;
 use App\Models\Cv;
+use App\Models\Entreprise;
 use Illuminate\Http\Request;
 
 class CandidateController extends Controller
@@ -67,6 +68,12 @@ class CandidateController extends Controller
         }
         $candidate->delete();
         return redirect()->back()->with('success', 'Company archived successfully.');
+    }
+    public function entreprise()
+    {
+        $entreprises = Entreprise::all();
+
+        return view('user.entreprise',compact('entreprises'));
     }
 
 

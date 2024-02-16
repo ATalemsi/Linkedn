@@ -33,14 +33,14 @@
             <x-input-error :messages="$errors->get('adresse')" class="mt-2" />
         </div>
 
-        <!-- Contact Information -->
+
         <div class="mt-4">
             <x-input-label for="informations_contact" :value="__('Contact Information')" />
             <x-text-input id="informations_contact" class="block mt-1 w-full" type="text" name="informations_contact" :value="old('informations_contact')" />
             <x-input-error :messages="$errors->get('informations_contact')" class="mt-2" />
         </div>
 
-        <!-- About -->
+
         <div class="mt-4">
             <x-input-label for="a_propos" :value="__('About')" />
             <textarea id="a_propos" name="a_propos" class="block mt-1 w-full rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50">{{ old('a_propos') }}</textarea>
