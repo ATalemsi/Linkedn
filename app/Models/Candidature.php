@@ -22,7 +22,6 @@ class Candidature extends Model
             $candidate->user()->delete();
         });
     }
-
     public function user()
     {
         return $this->belongsTo(User::class);

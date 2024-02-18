@@ -3,11 +3,10 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class RedirectIfNotAdmin
+class EntrepriseMiddleware
 {
     /**
      * Handle an incoming request.
@@ -16,8 +15,8 @@ class RedirectIfNotAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (!auth()->check() || !auth()->user()->role === 'admin') {
-            return redirect('/login');
+        if (auth()->check() && auth()->user()->role !== 'entreprise') {
+            return redirect()->back()->with('error', 'You do not have permission to access this page.');
         }
         return $next($request);
     }

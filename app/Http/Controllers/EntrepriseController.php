@@ -98,6 +98,7 @@ class EntrepriseController extends Controller
         $offres = OffreEmploi::where('titre', 'like', "%$query%")
             ->orWhere('type_contrat', 'like', "%$query%")
             ->orWhere('competences_requises', 'like', "%$query%")
+            ->orWhere('emplacement', 'like', "%$query%")
             ->get();
 
         return view('user.offre', compact('offres'));

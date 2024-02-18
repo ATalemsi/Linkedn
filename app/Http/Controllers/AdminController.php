@@ -28,8 +28,13 @@ class AdminController extends Controller
     {
 
     }
-    public function statistiques()
+    public function statistique()
     {
+        $totalCandidatures = Candidature::count();
+        $totalCompanies = Entreprise::count();
+        $totalJobOffers = OffreEmploi::count();
+
+        return view('admin.statistique', compact('totalCandidatures', 'totalCompanies', 'totalJobOffers'));
 
     }
 }
